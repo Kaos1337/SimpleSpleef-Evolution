@@ -45,7 +45,7 @@ public class SimpleSpleefCommandExecutor implements CommandExecutor {
 	 */
 	private final static String[] consoleCommands = {"help", "announce", "arenas", "info", "list", "countdown", "reset", "admin", "player", "topten" };
 
-	private final static String NoPermission = "[SSEvo] You do not have permission.";
+	//private final static String NoPermission = "[SSEvo] You do not have permission.";
 
 	/**
 	 * Print command string from settings line
