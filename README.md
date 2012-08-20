@@ -1,4 +1,0 @@
-SimpleSpleef-Evolution
-======================
-
-SimpleSpleef Evolution
