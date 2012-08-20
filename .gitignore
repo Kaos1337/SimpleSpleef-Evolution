@@ -1,0 +1,11 @@
+# Eclipse stuff
+/.classpath
+/.project
+/.settings
+/.checkstyle
+
+# various other potential build files
+/build
+/bin
+/dist
+/manifest.mf
