@@ -1,0 +1,391 @@
+# Simple Spleef configuration
+# Note on materials: If you use numbers for IDs and data values, make sure that you use an amount! E.g.: 1:35:5 or WOOL:5 works, but not 35:5!
+# RED_WOOL does not work! Use WOOL:14 instead!
+# Also, if you use single item ids (like 42 for iron block, make sure to suround them with ' - e.g. '42'. If you forget to do this, Bukkit
+# will interpret the value as integer and bug SimpleSpleef...
+# Material ids/names can be found at https://github.com/Bukkit/Bukkit/blob/master/src/main/java/org/bukkit/Material.java
+# Version number of configuration - do not touch! It is used for automatic updates of configuration settings. 
+version: 3
+# Language - reads configuration from specific language file
+language: en
+settings:
+# Check for updates on server start (output notification to server console, your server has to connect to remote server to check version numbers)
+    updateNotificationOnStart: true
+# Check for updates whenever an operator or user with the right simplespleef.admin logs in (your server has to connect to remote server to check version numbers)
+    updateNotificationOnLogin: true
+# "default" arena
+    defaultArena: default
+# active arena command signs to join/spectate/return/etc.
+    enableSigns: true
+# Use separate sign permissions (like simplespleef.sign.help, instead of simplespleef.help) for clicking on signs.
+# With this, you can disallow commands, but allow clicking on signs by defining separate permissions for commands and signs.
+    useSignPermissions: true
+# if signs are used, look for this on the first line to make the sign a SimpleSpleef command sign
+# command parameters are then one per line, e.g.:
+# [Spleef]
+# join
+# coolarena
+# => will execute /spl join coolarena for a player hitting the sign
+    signsFirstLine: '[Spleef]'
+# only right click will execute the command
+    signsOnlyRightClick: false
+# globally announce when a game is created by someone not joining the game
+    announceGame: true
+# globally announce when players join games
+    announceJoin: true
+# globally announce when player joins a team
+    announceTeam: false
+# globally announce when player ready for the game    
+    announceReady: false
+# globally announce when game starts
+    announceStart: true
+# globally announce when game stops
+    announceStop: true
+# globally announce when game is deleted
+    announceDelete: true
+# globally announce countdown
+    announceCountdown: false
+# globally announce when players lose
+    announceLose: true
+# globally announce when players win the game
+    announceWin: true
+# globally announce the prize won by a player
+    announcePrize: true
+# maximum announcement radius for broadcasts - you have to define the arena block to make this work and set the radius > -1
+    announcementRadius: -1
+# should messages be sent to the console, too?
+    sendMessagesToConsole: true
+# prevent players from teleporting into/out of the arena during the game
+    preventTeleportingDuringGames: true
+# Keep original positions of players/spectators for this number of seconds (default is 1h)
+    keepOriginalLocationsSeconds: 3600
+# Change the game mode when a game ends or when teleporting back. This only applies when a player was in creative mode and leaves the game.
+# Keep in mind that this opens a possible exploit: When joining from a creative world and leaving the game players stay in creative mode.
+# If you have a combination of creative and survival games, turn off this setting.
+    changeGameModeBackToCreative: true
+# Enable statistics module?
+    enableStatistics: true
+# Type of statistics module; possible values are: file, beardstat, hawkeye
+# beardstat uses beardstat api for players' wins and losses - adds a spleef category with these two entries (other stats are kept in file)
+# hawkeye feeds HawkEye with several types of statistics events such as winning and losing (stats themselves are kept in file)
+    statisticsModule: file
+# Settings for statistics modules
+    statisticsSettings: false
+# arena specific settings
+arenas:
+# default arena
+# IMPORTANT NOTE: Arena keys have to be lower case! Please do not delete default arena! If you do not need it, simply disable it!
+    default:
+# fancy name of arena
+        name: 'Spleef Arena'
+# type - this can contain either standard, randomteams (for balanced, random teams) or a class name like com.mystuff.MySpleefGameImpl
+        type: standard
+# enabled?
+        enabled: true
+# Minimum and maximum players
+        minimumPlayers: 2
+        maximumPlayers: 0
+# Number of players still in the game to determine winning (each of these will get a prize) - setting is ignored in team games
+        remainingPlayersWin: 1
+# Initiate game on joining (otherwise someone has to "/spleef announce" the arena)
+        announceOnJoin: true
+# Start the countdown by typing "/spleef start" - otherwise someone has to "/spleef countdown" the arena)
+        spleeferStart: true
+# Only applicable for team arenas:  Allow players to choose teams using the team command and/or teamBlocks (see below).
+        teamCommand: true
+# Only applicable for team arenas:  Team block for joining the blue team.
+        teamBlockMaterialBlue: WOOL:11
+# Only applicable for team arenas:  Team block for joining the red team.
+        teamBlockMaterialRed: WOOL:14
+# Only applicable for team arenas:  If readying is used (see below), then joing a team block will also ready the player.
+        teamJoiningAlsoReadies: true
+# game has to be "ready" to start playing - takes false, command, block, and commandAndBlock as arguments - if false, game has not to be ready to start
+        useReady: false
+# Should the game start automatically, once all players are ready?
+        readyAutoStart: true
+# If useReady has the value block or commandAndBlock, use the following material block that can be touched to ready the game (default iron block = 42)
+# If you use colored wool, please use WOOL:4 (for yellow wool) - in team games, this will ready the gamer for any team.
+        readyBlockMaterial: '42'
+# Timeout in seconds for readying. If set to a number above 1, a timer starts after the first player readies. It waits for [readyTimeout]
+# seconds for other players to ready. Once the timer expires, unready players will be kicked from the spleef game. If readyAutoStart has
+# been set to true and enough players are available, the game will then start. Otherwise, the game will be ready to start via command/sign.
+        readyTimeout: 0
+# Require players to have an empty inventory and no armor when joining (keeps them from possibly losing their inventory when they log out)
+        emptyInventoryToJoin: false
+# Require spectators to have an empty inventory and no armor (they can't throw peanuts at the players)
+        emptyInventoryToSpectate: false
+# Clear inventory at game start and restore after game has ended (sometimes inventory cannot be restored when logging out)
+        clearInventory: false
+# Add stuff the inventory? amount:item or amount:item:subid
+        addToInventory: false
+        addInventoryItems:
+            - 1:BOW
+            - 64:ARROW
+# Fees to join (money) - Vault required
+        entryFee: 5.0
+# Player who receives all or part of the entry fee
+        entryFeeGoesToPlayer: none
+# Amount of money the "player" specified in entryFeeGoesToPlayer receives for a joined player
+        entryFeeAmountToPlayer: 5.0
+# Turn prizes of items on/off
+        giveItemPrizes: true
+# Prizes (name/id): amount:item or amount:item:subid
+        itemPrizes:
+            - 1:APPLE
+            - 1:BED
+            - 6:BOOK
+            - 1:CAKE
+            - 1:CHAINMAIL_HELMET
+            - 16:CLAY_BALL
+            - 1:COMPASS
+            - 4:COOKED_FISH
+            - 1:DIAMOND
+            - 1:FLINT_AND_STEEL
+            - 1:GOLD_INGOT
+            - 4:IRON_INGOT
+            - 1:GLOWSTONE
+            - 1:GOLD_HELMET
+            - 16:INK_SACK
+            - 1:IRON_HELMET
+            - 2:OBSIDIAN
+            - 6:RED_ROSE
+            - 3:SNOW_BLOCK
+            - 6:STRING
+            - 3:SULPHUR
+            - 1:TNT
+            - 6:YELLOW_FLOWER
+            - 1:MELON_SEEDS
+            - 1:EYE_OF_ENDER
+            - 1:GRASS
+            - 4:SMOOTH_BRICK:1
+# Winner gets this amount of price money for each player in game - Vault required
+        prizeMoneyPerPlayer: 5.0
+# Winner gets this amount of price money fixed (total is per player + fixed) - Vault required
+        prizeMoneyFixed: 0.0
+# Winner gets this amount of experience for each player in game
+        prizeExperiencePerPlayer: 0
+# Winner gets this amount of experience fixed (total is per player + fixed)
+        prizeExperienceFixed: 0
+# If a player leaves the game before it has started or the game is deleted, refund this amount of money
+        refundMoney: 0.0
+# Lose game by touching certain blocks?
+        loseOnTouchBlocks: true
+# Lose game by touching these blocks (in them/standing on them - name/id)
+        loseBlocks:
+            - STATIONARY_WATER
+            - STATIONARY_LAVA
+# Win game by touching certain blocks?
+        winOnTouchBlocks: false
+# Win game by touching these blocks (in them/standing on them - name/id)
+        winBlocks:
+            - GOLD_BLOCK
+# Players dying lose
+        loseOnDeath: true
+# Players logging out lose change this only to false, if you have some sort of timeout set in your arena. Otherwise you might end up with neverending games...
+        loseOnLogout: true
+# Players do not starve while playing in the arena
+        noHunger: true
+# Disallow PVP while spleefing (no effect on no-pvp worlds)
+        noPvP: true
+# Block degeneration - if set to a number of 0 or higher, this will be the maximum seconds a player may stand on a single block before it dissolves
+        blockDegeneration: -1
+# List if blocks that will degenerate by standing on them too long (if blockDegeneration >= 0)
+        degeneratingBlocks:
+            - DIRT
+            - GRASS
+            - WOOL
+            - SNOW_BLOCK
+            - ICE
+            - GLASS
+# Allow Digging away of blocks (name/id) of...
+        allowDigBlocks:
+            - DIRT
+            - GRASS
+            - WOOL
+            - SNOW_BLOCK
+            - ICE
+            - GLASS
+# Alternatively: disallow digging away of certain blocks (name/id)
+        disallowDigBlocks:
+            - STONE
+# Instant digging of blocks (no shovel needed)
+        instantDig: true
+# Alternatively: players are given shovel at the start of the game
+        playersReceiveShovelAtGameStart: false
+# players lose shovel when leaving game (also stop, etc.)
+        playersLoseShovelAtGameEnd: false
+# Item (name/id) of shovel/spade
+        shovelItem: DIAMOND_SPADE
+# Countdown starts at
+        countdownFrom: 10
+# Can blocks be placed
+        allowBlockPlacing: false
+# If instantDig is false, do dug blocks drop blocks that can be picked up by players?
+        blockDropping: true
+# If arena not defined: none, floorOnly, everywhere (if floor is also undefined, floorOnly will default to everywhere)
+        diggingIfArenaUndefined: floorOnly
+# If floor not defined: none, inArena, outsideArena, everywhere (if arena is undefined, inArena and outsideArena will default to everywhere)
+        diggingIfFloorUndefined: inArena
+# Protect arena against changes by non-players (arena cube has to be defined)
+        protectArena: true
+# Disallow creatures to spawn in the arena (arena cube has to be defined)
+        disallowCreatureSpawns: true
+# Disallow explosions during the game (protectArena protects the arena outside the games, this is to actually allow explosions during the game)
+# This setting does not work in conjunction with arenaFloorDissolvesAfter and arenaFloorRepairsAfter.
+        enableExplosionsDuringGame: false
+# Restore arena after the game - this setting allows several options:
+# - false: turn arena restoration off completely
+# - true/soft: keeps track of removed/placed blocks and restores them after the game in a "soft" way - memory intensive and does not work for everybody it seems
+# - simple: simple floor restorer - will fill the area defined as floor (see below) with a certain block at the start and end of games - use if you have trouble with the soft restorer
+# - floorhard: resets the floor the hard way (does not touch placed blocks outside arena floor, so disable blockplacing!)
+# - arenahard: resets the whole arena the hard way (may lag on large arenas)
+        restoreArenaAfterGame: true
+# Block type that the simple restorer will set as floor block - only simple materials are allowed, so you can't set colored wool, sorry!
+        simpleRestorerBlock: GRASS
+# Wait for a number of seconds before restoring arena - 0 to disable this timer
+        restoreArenaAfterGameTimer: 0
+# Players can teleport back to original position after game with /spl back?
+        enableBackCommand: true
+# Time in seconds, after which the arena floor starts to dissolve slowly (-1 disables this)
+        arenaFloorDissolvesAfter: -1
+# Time in seconds for new blocks to dissolve into thin air
+        arenaFloorDissolveTick: 5
+# Time in seconds, after which the arena floor starts to repair (-1 disables this)
+        arenaFloorRepairsAfter: -1
+# Time in seconds for new blocks to get repaired
+        arenaFloorRepairTick: 10
+# Timeout for the game in seconds - e.g. 10 minutes will be 60 secs * 10 = 600 (0 or lower to disable this setting)
+# Note: If you use NoLagg the teleportation back to the lounge after the game has finished will throw a warning.
+# Can't do much about this at the moment. 
+        arenaTimeout: 0
+# Arena cube that will be protected (saved on disk for restoration)
+        arena:
+            enabled: false
+#Instead of a and b, you can also set up a world guard region () bot here (you have to have world guard installed, of course...):
+#           worldguardRegion: arena
+#           worldguardWorld: world
+# Note: If you use WorldGuard and regions, regions will be read at server start and when reloading plugin configuration.
+# So, if you change SimpleSpleef related regions, make sure to reload SimpleSpleef, too (/spla reload).
+# Cubes only at the moment!
+            a:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+            b:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+# Arena floor (can be dug by players)
+        floor:
+            enabled: false
+            a:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+            b:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+# Entering this cube area will make players lose
+        lose:
+            enabled: false
+            a:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+            b:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+# Entering this cube area will make players win
+        win:
+            enabled: false
+            a:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+            b:
+                world: world
+                x: 0
+                y: 0
+                z: 0
+# Teleport point where players are sent to after joining game
+        loungeSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where players are sent to after starting game
+        gameSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where players are sent to after starting game (red team, if using teams)
+        redSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where players are sent to after starting game (blue team, if using teams)
+        blueSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where spectators can watch from
+        spectatorSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where players are teleported to after loosing game
+        loseSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Teleport point where winners are teleported to
+        winnerSpawn:
+            enabled: false
+            world: world
+            pitch: 0.0
+            yaw: 0.0
+            x: 0.0
+            y: 0.0
+            z: 0.0
+# Command whitelist section
+checkCommands:
+# Activate command white list during games. If you set this on, only commands in the whitelist will be accepted for spleefers during games.
+# ALL other commands will be blocked!
+    activateWhitelist: true
+# Whitelist list. List command patterns that are whitelisted. This uses regular expressions - e.g. ^ means start of the string.
+# For a short tutorial, see http://www.vogella.de/articles/JavaRegularExpressions/article.html
+    whitelist:
+        - '^/spl'
+        - '^/spla'
