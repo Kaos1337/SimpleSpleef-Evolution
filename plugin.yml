@@ -1,6 +1,6 @@
-name: SimpleSpleefEvolution
-main: net.kaoslabs.simplespleefevolution.SimpleSpleef
-version: 3.2
+name: SimpleSpleef
+main: net.kaoslabs.simplespleef.SimpleSpleef
+version: 3.3
 dev-url: http://dev.bukkit.org/server-mods/simplespleef-evolution/
 author: [Kaos, zorlax]
 description: >
