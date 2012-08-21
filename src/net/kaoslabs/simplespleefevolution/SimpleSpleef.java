@@ -434,8 +434,9 @@ public class SimpleSpleef extends JavaPlugin {
 		try {
 		    Metrics metrics = new Metrics(this);
 		    metrics.start();
+		    SimpleSpleef.log.info("[SimpleSpleefEvo] Metrics connection started.");
 		} catch (IOException e) {
-			getLogger().info("Failed to submit the stats :-(");// Failed to submit the stats :-(
+			SimpleSpleef.log.warning("[SimpleSpleefEvo] Failed to submit the stats :-("); // Failed to submit the stats :-(
 		}
 	}
 
