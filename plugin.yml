@@ -1,7 +1,7 @@
 name: SimpleSpleefEvolution
 main: net.kaoslabs.simplespleefevolution.SimpleSpleef
-version: 3.1
-dev-url: http://dev.bukkit.org/server-mods/simple-spleef/
+version: 3.2
+dev-url: http://dev.bukkit.org/server-mods/simplespleef-evolution/
 author: [Kaos, zorlax]
 description: >
              Simple Spleef Plugin
@@ -11,18 +11,6 @@ commands:
     description: Control your spleef games
     aliases: [spl,spla,spleefsigncmd]
     usage: /<command> is the SimpleSpleef command - you have no permission to use it at all!
-  spleef join:
-    description: Join to the arena
-    aliases: [spl,spla,spleefsigncmd]
-    permission: simplespleef.join
-  spleef list:
-    description: Join to the arena
-    aliases: [spl,spla,spleefsigncmd]
-    permission: simplespleef.list
-  spleef leave:
-    description: Join to the arena
-    aliases: [spl,spla,spleefsigncmd]
-    permission: simplespleef.leave
 
 permissions:
   simplespleef.help:
