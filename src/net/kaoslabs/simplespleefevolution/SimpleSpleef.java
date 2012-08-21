@@ -221,6 +221,7 @@ public class SimpleSpleef extends JavaPlugin {
 		
 		startMetrics();
 		
+		// check the presence of Vault plugin (required)
 		PluginManager pm = getServer().getPluginManager();
 		if (pm.getPlugin("Vault") == null) {
 			getLogger().info("Permission plugin not found... shutting down!");
