@@ -83,12 +83,12 @@ public class SimpleSpleef extends JavaPlugin {
 				return SimpleSpleef.permission.has(sender, permission);
 			} catch (NoSuchMethodError e) {
 				// if for some reason there is a problem with Vault, fall back to default permissions
-				SimpleSpleef.log.warning("[SimpleSpleefEvo] Checking Vault permission threw an exception. Are you using the most recent version? Falling back to to default permission checking.");
+				SimpleSpleef.log.warning("[SimpleSpleef] Checking Vault permission threw an exception. Are you using the most recent version? Falling back to to default permission checking.");
 			}
 		}
 		// fallback to default Bukkit permission checking system
 		if(SimpleSpleef.DEBUG_MODE)
-			System.out.println("[DEBUGpd] Player: "+sender.getName()+" | permessi per "+permission+"? -> "+ sender.hasPermission(permission)+ "| Controllo: "+sender.isPermissionSet(permission));
+			System.out.println("[DEBUG] Player: "+sender.getName()+" | permessi per "+permission+"? -> "+ sender.hasPermission(permission)+ "| Controllo: "+sender.isPermissionSet(permission));
 		return sender.hasPermission(permission) || sender.hasPermission("simplespleef.*");
 	}
 
@@ -307,9 +307,9 @@ public class SimpleSpleef extends JavaPlugin {
 		    	try {
 					String newVersion = checker.checkForUpdate(SimpleSpleef.simpleSpleef.getDescription().getVersion());
 					if (newVersion != null)
-						log.info("[SimpleSpleefEvo] Update found for SimpleSpleef - please go to http://dev.bukkit.org/server-mods/simplespleef-evolution/ to download version " + newVersion + "!");
+						log.info("[SimpleSpleef] Update found for SimpleSpleef - please go to http://dev.bukkit.org/server-mods/simplespleef-evolution/ to download version " + newVersion + "!");
 				} catch (Exception e) {
-					log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
+					log.warning("[SimpleSpleef] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
 				}
 		    }
 		}, 0L);
@@ -369,11 +369,11 @@ public class SimpleSpleef extends JavaPlugin {
 				economy = economyProvider.getProvider();
 			}
 	
-			SimpleSpleef.log.info("[SimpleSpleefEvo] Vault hooked as economy plugin.");
+			SimpleSpleef.log.info("[SimpleSpleef] Vault hooked as economy plugin.");
 			return (economy != null);
 		}
 		economy = null; // if the plugin is reloaded during play, possibly kill economy
-		SimpleSpleef.log.info("[SimpleSpleefEvo] Vault plugin not found - not using economy.");
+		SimpleSpleef.log.info("[SimpleSpleef] Vault plugin not found - not using economy.");
 		return false;
 	}
 	
@@ -388,11 +388,11 @@ public class SimpleSpleef extends JavaPlugin {
 	            permission = permissionProvider.getProvider();
 	        }
 	
-			SimpleSpleef.log.info("[SimpleSpleefEvo] Vault hooked as permission plugin.");
+			SimpleSpleef.log.info("[SimpleSpleef] Vault hooked as permission plugin.");
 	        return (permission != null);
 		}
 		permission = null; // if the plugin is reloaded during play, possibly kill permissions
-		SimpleSpleef.log.info("[SimpleSpleefEvo] Vault plugin not found - defaulting to Bukkit permission system.");
+		SimpleSpleef.log.info("[SimpleSpleef] Vault plugin not found - defaulting to Bukkit permission system.");
 		return false;
 	}
 
@@ -407,14 +407,14 @@ public class SimpleSpleef extends JavaPlugin {
 				double version = Double.parseDouble(plugin.getDescription().getVersion());
 				if (version < 5.0) {
 					SimpleSpleef.log
-					.warning("[SimpleSpleefEvo] Found WorldEdit, but must be at least version 5.0 to work! Ignoring it.");
+					.warning("[SimpleSpleef] Found WorldEdit, but must be at least version 5.0 to work! Ignoring it.");
 					return;
 				}
 			} catch (Exception e) {} // no number, should be fine...
 			
 			SimpleSpleef.setWorldEditAPI(new WorldEditAPI((WorldEditPlugin) plugin));
 			SimpleSpleef.log
-					.info("[SimpleSpleefEvo] Found WorldEdit " + plugin.getDescription().getVersion() + ". Using it for selections.");
+					.info("[SimpleSpleef] Found WorldEdit " + plugin.getDescription().getVersion() + ". Using it for selections.");
 		}
 	}
 
@@ -437,9 +437,9 @@ public class SimpleSpleef extends JavaPlugin {
 		try {	
 			Metrics metrics = new Metrics(this);	
 			metrics.start();
-			SimpleSpleef.log.info("[SimpleSpleefEvo] Metrics connection started.");
+			SimpleSpleef.log.info("[SimpleSpleef] Metrics connection started.");
 		} catch (IOException e) {
-			SimpleSpleef.log.warning("[SimpleSpleefEvo] Failed to submit the stats :-("); // Failed to submit the stats :-(
+			SimpleSpleef.log.warning("[SimpleSpleef] Failed to submit the stats :-("); // Failed to submit the stats :-(
 		}
 	}
 
@@ -453,7 +453,7 @@ public class SimpleSpleef extends JavaPlugin {
 				statisticsModule = statisticsHandler.getStatisticsModuleByName(getConfig().getString("settings.statisticsModule", "file"),
 						getConfig().getConfigurationSection("settings.statisticsSettings"));
 			} catch (Exception e) {
-				SimpleSpleef.log.warning("[SimpleSpleefEvo] Could not initiate statistics module - settings bugged somehow or database error. Disabling statistics for now.");
+				SimpleSpleef.log.warning("[SimpleSpleef] Could not initiate statistics module - settings bugged somehow or database error. Disabling statistics for now.");
 				statisticsModule = null;
 			}
 		else statisticsModule = null;

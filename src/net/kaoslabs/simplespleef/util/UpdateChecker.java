@@ -140,7 +140,7 @@ public class UpdateChecker implements Listener {
 		
 		// increase version number
 		if (changed) {
-			SimpleSpleef.log.info("[SimpleSpleefEvo] Updating configuration from version " + version + " to version 3.");
+			SimpleSpleef.log.info("[SimpleSpleef] Updating configuration from version " + version + " to version 3.");
 			config.set("version", 3);
 			SimpleSpleef.getPlugin().saveConfig();
 		}
