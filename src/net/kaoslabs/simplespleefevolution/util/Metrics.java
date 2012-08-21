@@ -362,7 +362,7 @@ public class Metrics {
         encodeDataPair(data, "server", Bukkit.getVersion());
         encodeDataPair(data, "players", Integer.toString(Bukkit.getServer().getOnlinePlayers().length));
         encodeDataPair(data, "revision", String.valueOf(REVISION));
-        encodeDataPair(data, "author", "Kaos, zolax");
+        //encodeDataPair(data, "author", "Kaos, zolax");
 
         // If we're pinging, append it
         if (isPing) {
