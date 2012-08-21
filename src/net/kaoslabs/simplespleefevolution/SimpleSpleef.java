@@ -19,6 +19,7 @@
 
 package net.kaoslabs.simplespleefevolution;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -49,6 +50,7 @@ import net.kaoslabs.simplespleefevolution.statistics.StatisticsModule;
 import net.kaoslabs.simplespleefevolution.util.ConfigHelper;
 import net.kaoslabs.simplespleefevolution.util.Translator;
 import net.kaoslabs.simplespleefevolution.util.UpdateChecker;
+import net.kaoslabs.simplespleefevolution.util.Metrics;
 
 /**
  * @author mkalus
@@ -216,6 +218,8 @@ public class SimpleSpleef extends JavaPlugin {
 		checkForWorldEdit();
 		// create statistics handler
 		createStatisticsHander();
+		
+		startMetrics();
 		
 		PluginManager pm = getServer().getPluginManager();
 		if (pm.getPlugin("Vault") == null) {
@@ -424,6 +428,15 @@ public class SimpleSpleef extends JavaPlugin {
 	    }
 	 
 	    return (WorldGuardPlugin) plugin;
+	}
+	
+	public void startMetrics() {
+		try {
+		    Metrics metrics = new Metrics(this);
+		    metrics.start();
+		} catch (IOException e) {
+			getLogger().info("Failed to submit the stats :-(");// Failed to submit the stats :-(
+		}
 	}
 
 
