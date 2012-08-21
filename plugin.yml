@@ -2,7 +2,7 @@ name: SimpleSpleefEvolution
 main: net.kaoslabs.simplespleefevolution.SimpleSpleef
 version: 3.1
 dev-url: http://dev.bukkit.org/server-mods/simple-spleef/
-author: Kaosvf
+author: Kaos, zorlax
 description: >
              Simple Spleef Plugin
 softdepend: ['Vault','WorldEdit','WorldGuard']
