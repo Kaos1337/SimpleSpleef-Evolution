@@ -19,7 +19,6 @@
 
 package net.kaoslabs.simplespleefevolution;
 
-import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -50,7 +49,6 @@ import net.kaoslabs.simplespleefevolution.statistics.StatisticsModule;
 import net.kaoslabs.simplespleefevolution.util.ConfigHelper;
 import net.kaoslabs.simplespleefevolution.util.Translator;
 import net.kaoslabs.simplespleefevolution.util.UpdateChecker;
-import net.kaoslabs.simplespleefevolution.util.Metrics;
 
 /**
  * @author mkalus
@@ -219,8 +217,6 @@ public class SimpleSpleef extends JavaPlugin {
 		// create statistics handler
 		createStatisticsHander();
 		
-		startMetrics();
-		
 		// check the presence of Vault plugin (required)
 		PluginManager pm = getServer().getPluginManager();
 		if (pm.getPlugin("Vault") == null) {
@@ -305,7 +301,7 @@ public class SimpleSpleef extends JavaPlugin {
 		    	try {
 					String newVersion = checker.checkForUpdate(SimpleSpleef.simpleSpleef.getDescription().getVersion());
 					if (newVersion != null)
-						log.info("[SimpleSpleefEvo] Update found for SimpleSpleef - please go to http://dev.bukkit.org/server-mods/simple-spleef/ to download version " + newVersion + "!");
+						log.info("[SimpleSpleefEvo] Update found for SimpleSpleef - please go to https://github.com/Kaosvf/SimpleSpleef-Evolution/downloads to download version " + newVersion + "!");
 				} catch (Exception e) {
 					log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
 				}
@@ -429,16 +425,6 @@ public class SimpleSpleef extends JavaPlugin {
 	    }
 	 
 	    return (WorldGuardPlugin) plugin;
-	}
-	
-	public void startMetrics() {
-		try {
-		    Metrics metrics = new Metrics(this);
-		    metrics.start();
-		    SimpleSpleef.log.info("[SimpleSpleefEvo] Metrics connection started.");
-		} catch (IOException e) {
-			SimpleSpleef.log.warning("[SimpleSpleefEvo] Failed to submit the stats :-("); // Failed to submit the stats :-(
-		}
 	}
 
 
