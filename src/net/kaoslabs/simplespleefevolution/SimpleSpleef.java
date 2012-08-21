@@ -307,7 +307,7 @@ public class SimpleSpleef extends JavaPlugin {
 		    	try {
 					String newVersion = checker.checkForUpdate(SimpleSpleef.simpleSpleef.getDescription().getVersion());
 					if (newVersion != null)
-						log.info("[SimpleSpleefEvo] Update found for SimpleSpleef - please go to https://github.com/Kaosvf/SimpleSpleef-Evolution/downloads to download version " + newVersion + "!");
+						log.info("[SimpleSpleefEvo] Update found for SimpleSpleef - please go to http://dev.bukkit.org/server-mods/simplespleef-evolution/ to download version " + newVersion + "!");
 				} catch (Exception e) {
 					log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
 				}

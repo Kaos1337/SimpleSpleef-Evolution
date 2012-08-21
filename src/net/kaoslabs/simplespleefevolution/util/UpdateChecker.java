@@ -140,7 +140,7 @@ public class UpdateChecker implements Listener {
 		
 		// increase version number
 		if (changed) {
-			SimpleSpleef.log.info("[SimpleSpleef] Updating configuration from version " + version + " to version 3.");
+			SimpleSpleef.log.info("[SimpleSpleefEvo] Updating configuration from version " + version + " to version 3.");
 			config.set("version", 3);
 			SimpleSpleef.getPlugin().saveConfig();
 		}
@@ -168,7 +168,7 @@ public class UpdateChecker implements Listener {
 								player.sendMessage(SimpleSpleef.ll("feedback.update", "[OLDVERSION]", oldVersion, "[NEWVERSION]", newVersion));
 						} catch (Exception e) {
 							player.sendMessage("SimpleSpleef could not get version update - see log for details.");
-							SimpleSpleef.log.warning("[SimpleSpleef] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
+							SimpleSpleef.log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
 						}
 					}
 				}, 0L);
