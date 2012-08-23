@@ -44,7 +44,7 @@ public class UpdateChecker implements Listener {
 	 */
 	public String checkForUpdate(String version) throws Exception {
 		// open HTTP connection
-		URL url = new URL("http://kaoslabs.net/projects/SimpleSpleefEvolution/check.version");
+		URL url = new URL("https://raw.github.com/Kaosvf/SimpleSpleef-Evolution/master/check.version");
 		URLConnection connection = url.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
