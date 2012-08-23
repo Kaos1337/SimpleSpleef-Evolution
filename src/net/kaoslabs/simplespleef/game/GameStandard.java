@@ -930,8 +930,10 @@ public class GameStandard extends Game {
 	public boolean onPlayerJoin(PlayerJoinEvent event) {
 		if (!isEnabled()) return false; // ignore disabled arenas
 
-		// right now, do nothing... later on maybe give shovel back or so (if it has been taken away before the game ended - that gets complicated...)
-		return true; //change this to false once enabled
+		Player joinedPlayer = event.getPlayer();
+		teleportPlayer(joinedPlayer, "spectator");
+  
+        return false;
 	}
 
 	@Override
