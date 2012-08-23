@@ -929,11 +929,12 @@ public class GameStandard extends Game {
 	@Override
 	public boolean onPlayerJoin(PlayerJoinEvent event) {
 		if (!isEnabled()) return false; // ignore disabled arenas
-
 		Player joinedPlayer = event.getPlayer();
-		teleportPlayer(joinedPlayer, "spectator");
-  
-        return false;
+		if(floor.contains(joinedPlayer.getLocation())){
+			teleportPlayer(joinedPlayer, "spectator");
+			return false;
+		}
+		return true;
 	}
 
 	@Override
