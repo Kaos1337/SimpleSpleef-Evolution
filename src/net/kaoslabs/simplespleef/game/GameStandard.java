@@ -63,7 +63,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
 import net.kaoslabs.simplespleef.SimpleSpleef;
 import net.kaoslabs.simplespleef.game.arenarestoring.*;
 import net.kaoslabs.simplespleef.game.trackers.*;
