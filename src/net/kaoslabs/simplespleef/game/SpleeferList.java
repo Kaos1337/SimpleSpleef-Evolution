@@ -243,6 +243,7 @@ public class SpleeferList {
 		for (Spleefer spleefer : spleefers.values()) {
 			if (!spleefer.isReady()) unready++;
 		}
+		
 		return unready;
 	}
 	

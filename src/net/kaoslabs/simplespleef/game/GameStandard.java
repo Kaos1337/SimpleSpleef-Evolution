@@ -213,7 +213,7 @@ public class GameStandard extends Game {
 	public void tick() {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 		
-		// call trackers in each tick 
+		 
 //        ArrayList<String> al = new ArrayList<String>();
 //        this.broadcastMessage("--Lista trakers--");
 //        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
@@ -221,21 +221,23 @@ public class GameStandard extends Game {
 //            this.broadcastMessage(currentTracker.getClass().getName());
 //        }
 //        this.broadcastMessage("----");
-
-//		List<Tracker> trackersToRemove = new LinkedList<Tracker>();
-//        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
-//            Tracker tracker = iterator.next();
-//            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
-//                System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
-//                //iterator.remove(); // remove element
-//                trackersToRemove.add(tracker);
-//            }
-//        }
-//        trackers.removeAll(trackersToRemove);
+		
+		// call trackers in each tick
+		synchronized(trackers){
+	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
+	            Tracker tracker = iterator.next();
+	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
+	                System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
+	                iterator.remove(); // remove element
+	                
+	            }
+	        }
+		}
 		
 		//System.out.println(trackers.size());
 
 		// check game end and there are not open trackers any more
+		
 		if (this.status == Game.STATUS_FINISHED && trackers.size() == 0) {
 			this.status = Game.STATUS_INACTIVE; // reset game to inactive status
 			renewTrackers(); // renew the trackers for the next game
