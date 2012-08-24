@@ -50,7 +50,6 @@ public class UpdateChecker implements Listener {
 		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		// just read first line
 		String inputLine = in.readLine();
-		System.out.println("inputlineeee" + inputLine + "version" + version);
 		in.close();
 		
 		if (inputLine != null && Double.valueOf(inputLine) <= Double.valueOf(version)) return null;
