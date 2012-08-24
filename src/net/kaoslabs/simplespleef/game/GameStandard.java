@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -212,13 +213,25 @@ public class GameStandard extends Game {
 	public void tick() {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 		
-		// call trackers in each tick
-		for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
-			Tracker tracker = iterator.next();
-			if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
-				iterator.remove(); // remove element
-			}
-		}
+		// call trackers in each tick 
+//        ArrayList<String> al = new ArrayList<String>();
+//        this.broadcastMessage("--Lista trakers--");
+//        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
+//            Tracker currentTracker = iterator.next();
+//            this.broadcastMessage(currentTracker.getClass().getName());
+//        }
+//        this.broadcastMessage("----");
+
+//		List<Tracker> trackersToRemove = new LinkedList<Tracker>();
+//        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
+//            Tracker tracker = iterator.next();
+//            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
+//                System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
+//                //iterator.remove(); // remove element
+//                trackersToRemove.add(tracker);
+//            }
+//        }
+//        trackers.removeAll(trackersToRemove);
 		
 		//System.out.println(trackers.size());
 
