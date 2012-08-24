@@ -21,7 +21,8 @@ package net.kaoslabs.simplespleef.util;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
@@ -45,7 +46,7 @@ public class UpdateChecker implements Listener {
 	public String checkForUpdate(String version) throws Exception {
 		// open HTTP connection
 		URL url = new URL("https://raw.github.com/Kaosvf/SimpleSpleef-Evolution/master/check.version");
-		URLConnection connection = url.openConnection();
+		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(
 				connection.getInputStream()));
 		// just read first line

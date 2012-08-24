@@ -212,24 +212,15 @@ public class GameStandard extends Game {
 	@Override
 	public void tick() {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
-		
-		 
-//        ArrayList<String> al = new ArrayList<String>();
-//        this.broadcastMessage("--Lista trakers--");
-//        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
-//            Tracker currentTracker = iterator.next();
-//            this.broadcastMessage(currentTracker.getClass().getName());
-//        }
-//        this.broadcastMessage("----");
+
 		
 		// call trackers in each tick
 		synchronized(trackers){
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
 	            Tracker tracker = iterator.next();
 	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
-	                System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
+	                //System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
 	                iterator.remove(); // remove element
-	                
 	            }
 	        }
 		}
