@@ -51,6 +51,7 @@ public class UpdateChecker implements Listener {
 				connection.getInputStream()));
 		// just read first line
 		String inputLine = in.readLine();
+		System.out.println("inputlineeee" + inputLine + "version" + version);
 		in.close();
 		
 		// convert versions to number and compare
