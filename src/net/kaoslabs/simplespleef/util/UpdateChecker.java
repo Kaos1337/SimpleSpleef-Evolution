@@ -47,14 +47,12 @@ public class UpdateChecker implements Listener {
 		// open HTTP connection
 		URL url = new URL("https://raw.github.com/Kaosvf/SimpleSpleef-Evolution/master/check.version");
 		HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-				connection.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		// just read first line
 		String inputLine = in.readLine();
 		in.close();
 		
-		// convert versions to number and compare
-		if (inputLine != null &&  versionToNumber(inputLine) <= versionToNumber(version)) return null; // no new update
+		if (inputLine != null && Double.valueOf(inputLine) <= Double.valueOf(version)) return null;
 
 		return inputLine; // new version
 	}
