@@ -24,7 +24,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -46,7 +45,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -190,7 +188,7 @@ public class GameStandard extends Game {
 		this.spectators = new LinkedList<Player>();
 		this.teleportOkList = new HashSet<Player>();
 		this.gamemodeChangeOkList = new HashSet<Player>();
-		this.trackers = new ArrayList<Tracker>();
+		this.trackers = new LinkedList<Tracker>();
 	}
 
 	@Override
@@ -217,18 +215,19 @@ public class GameStandard extends Game {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 
 		// call trackers in each tick
-		List<Tracker> pyrod = new ArrayList<Tracker>();
+		try{
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
 	            Tracker tracker = iterator.next();
 	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
 	            	if(SimpleSpleef.DEBUG_MODE)
 	            		System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName()+" toString:"+tracker);
-	                pyrod.add(tracker);
-	            	//iterator.remove(); // remove element
+	                iterator.remove(); // remove element
 	            }
+	            
 	        }
-	    trackers.removeAll(pyrod);
-	    
+		} catch(Exception e) {
+			System.out.println("[SpleefArenaDEBUG] Concurrent modification, ignoring.. (LOL)");
+		}
 	    if(SimpleSpleef.DEBUG_MODE)
 	    	System.out.println("[SpleefArenaDEBUG] tracker rimasti: "+StringUtils.listToString(trackers, "", ", ", ""));
 		
@@ -369,7 +368,7 @@ public class GameStandard extends Game {
 		// renew the tracking list if needed
 		
 		if (trackers.size() > 0)
-			trackers = new ArrayList<Tracker>();
+			trackers = new LinkedList<Tracker>();
 		
 		
 		// floor trackers that are only used with working floor
