@@ -217,10 +217,9 @@ public class GameStandard extends Game {
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
 	            Tracker tracker = iterator.next();
 	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
-	            	if(SimpleSpleef.DEBUG_MODE){
+	            	if(SimpleSpleef.DEBUG_MODE)
 	            		System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName());
-	            		iterator.remove(); // remove element
-	            	}
+	                iterator.remove(); // remove element
 	            }
 	        }
 		}
