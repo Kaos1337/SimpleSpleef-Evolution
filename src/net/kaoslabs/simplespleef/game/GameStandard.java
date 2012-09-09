@@ -45,6 +45,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -211,7 +212,6 @@ public class GameStandard extends Game {
 	public void tick() {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 
-		
 		// call trackers in each tick
 		synchronized(trackers){
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
@@ -235,16 +235,20 @@ public class GameStandard extends Game {
 
 	@Override
 	public void addTracker(Tracker tracker) {
-		if (!trackers.contains(tracker)) { // only add the same tracker once
-			trackers.add(tracker);
-			tracker.initialize(this);
+		synchronized(trackers){
+			if (!trackers.contains(tracker)) { // only add the same tracker once
+				trackers.add(tracker);
+				tracker.initialize(this);
+			}
 		}
 	}
 
 	@Override
 	public void interruptTracker(Tracker tracker) {
+		synchronized(trackers){
 		if (trackers.contains(tracker))
 			tracker.interrupt();
+		}
 	}
 
 	@Override
@@ -354,8 +358,10 @@ public class GameStandard extends Game {
 	 */
 	protected void renewTrackers() {
 		// renew the tracking list if needed
+		synchronized(trackers){
 		if (trackers.size() > 0)
 			trackers = new LinkedList<Tracker>();
+		}
 		
 		// floor trackers that are only used with working floor
 		if (floor != null) {
@@ -914,6 +920,7 @@ public class GameStandard extends Game {
 		if (configuration.getBoolean("loseOnLogout", true)) {
 			// broadcast message of somebody loosing
 			String broadcastMessage = ChatColor.GREEN + SimpleSpleef.ll("broadcasts.lostByQuitting", "[PLAYER]", player.getName(), "[ARENA]", getName());
+			
 			if (SimpleSpleef.getPlugin().getConfig().getBoolean("settings.announceLose", true)) {
 				broadcastMessage(broadcastMessage); // broadcast message
 			} else {
@@ -926,20 +933,18 @@ public class GameStandard extends Game {
 				changeGameModeToCreative(player);
 
 			// player loses, if set to true
-			playerLoses(player, false); // do not teleport dead players...
-		} // else - do nothing...
+			playerLoses(player, true); // do not teleport dead players...
+		} else {
+			teleportPlayer(player, "lose");
+		}
 	}
 
 	@Override
 	public boolean onPlayerJoin(PlayerJoinEvent event) {
 		if (!isEnabled()) return false; // ignore disabled arenas
-		Player joinedPlayer = event.getPlayer();
-		if(arena.contains(joinedPlayer.getLocation())){
-			teleportPlayer(joinedPlayer, "spectator");
-			return false;
-		}
 		return true;
 	}
+	
 
 	@Override
 	public boolean onPlayerDeath(Player player) {
@@ -1684,7 +1689,8 @@ public class GameStandard extends Game {
 		// restore inventory
 		restoreInventory(player);
 		// teleport player to lose spawn
-		if (teleport) teleportPlayer(player, "lose");
+		if (teleport)
+			teleportPlayer(player, "lose");
 		// update player's game mode
 		if (SimpleSpleef.getOriginalPositionKeeper().wasInCreativeBefore(player))
 			changeGameModeToCreative(player);
