@@ -697,17 +697,18 @@ public class GameStandard extends Game {
 
 		// possibly clear inventory
 		clearInventories();
+		
+		// disable fly
+		for (Spleefer spleefer : spleefers.get()) {
+			spleefer.getPlayer().setAllowFlight(false);
+			spleefer.getPlayer().setFlying(false);
+		}
 
 		// optionally add to inventory
 		addToInventories();
 
 		// and/or give shovels
 		addShovelItems();
-		
-		// disable fly
-		for (Spleefer spleefer : spleefers.get()) {
-			spleefer.getPlayer().setFlying(false);
-		}
 
 		return true;
 	}
