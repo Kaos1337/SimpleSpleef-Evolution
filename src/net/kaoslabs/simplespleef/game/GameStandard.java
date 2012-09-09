@@ -211,7 +211,7 @@ public class GameStandard extends Game {
 	}
 
 	@Override
-	public synchronized void tick() {
+	public void tick() {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 
 		// call trackers in each tick
@@ -364,7 +364,7 @@ public class GameStandard extends Game {
 	/**
 	 * renew the trackers
 	 */
-	protected synchronized void renewTrackers() {
+	protected void renewTrackers() {
 		// renew the tracking list if needed
 		
 		if (trackers.size() > 0)
