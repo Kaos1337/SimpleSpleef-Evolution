@@ -58,6 +58,8 @@ public class Countdown implements Tracker {
 	 */
 	public Countdown(int count) {
 		this.count = count;
+		if(SimpleSpleef.DEBUG_MODE)
+			System.out.println("[SpleefArenaDEBUG] tracker creato: "+this);
 	}
 
 	/* (non-Javadoc)

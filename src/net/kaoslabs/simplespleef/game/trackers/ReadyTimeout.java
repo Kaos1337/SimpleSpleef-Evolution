@@ -68,6 +68,8 @@ public class ReadyTimeout implements Tracker {
 	public ReadyTimeout(int count) {
 		this.originalCount = count;
 		this.count = count;
+		if(SimpleSpleef.DEBUG_MODE)
+			System.out.println("[SpleefArenaDEBUG] tracker creato: "+this);
 	}
 
 	/* (non-Javadoc)
@@ -93,6 +95,9 @@ public class ReadyTimeout implements Tracker {
 	public boolean tick() {
 		// if interrupted or finished - kill timeout
 		if (interrupted || game.isInProgress() || game.isFinished()) return true;
+		
+		if(SimpleSpleef.DEBUG_MODE)
+			System.out.println("[SpleefArenaDEBUG]"+ this + " called a tick | interrupted="+interrupted+", game="+game.getStatus()+", count="+count);
 		
 		// wait as long as game is joinable
 		if (!game.isJoinable()) return false;
