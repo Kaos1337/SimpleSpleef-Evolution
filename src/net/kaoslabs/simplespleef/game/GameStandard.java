@@ -64,10 +64,13 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+
 import net.kaoslabs.simplespleef.SimpleSpleef;
 import net.kaoslabs.simplespleef.game.arenarestoring.*;
 import net.kaoslabs.simplespleef.game.trackers.*;
 import net.kaoslabs.simplespleef.gamehelpers.*;
+import net.kaoslabs.simplespleef.util.StringUtils;
 
 /**
  * @author mkalus
@@ -221,8 +224,10 @@ public class GameStandard extends Game {
 	            		System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName()+" toString:"+tracker);
 	                iterator.remove(); // remove element
 	            }
+	            
 	        }
-		
+	    if(SimpleSpleef.DEBUG_MODE)
+	    	System.out.println("[SpleefArenaDEBUG] tracker rimasti: "+StringUtils.listToString(trackers, "", ", ", ""));
 		
 		//System.out.println(trackers.size());
 

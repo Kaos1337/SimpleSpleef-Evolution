@@ -110,11 +110,7 @@ public class GameHandler implements Listener, Runnable {
 	 */
 	@Override
 	public void run() {
-		
 		for (Game game : games){ // cycle through games
-			if(SimpleSpleef.DEBUG_MODE)
-				System.out.println("[SpleefArenaDEBUG] game: "+game);
-			
 			game.tick(); // call tick
 		}
 	}
