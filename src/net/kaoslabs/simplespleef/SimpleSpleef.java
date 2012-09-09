@@ -60,7 +60,7 @@ import net.kaoslabs.simplespleef.util.UpdateChecker;
 public class SimpleSpleef extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 
-	public static final boolean DEBUG_MODE = false;
+	public static final boolean DEBUG_MODE = true;
 	
 	/**
 	 * reference to Vault economy
