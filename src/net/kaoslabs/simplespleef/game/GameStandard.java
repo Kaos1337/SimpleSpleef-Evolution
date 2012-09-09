@@ -213,7 +213,7 @@ public class GameStandard extends Game {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 
 		// call trackers in each tick
-		synchronized(trackers){
+		
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
 	            Tracker tracker = iterator.next();
 	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
@@ -222,7 +222,7 @@ public class GameStandard extends Game {
 	                iterator.remove(); // remove element
 	            }
 	        }
-		}
+		
 		
 		//System.out.println(trackers.size());
 
@@ -236,20 +236,20 @@ public class GameStandard extends Game {
 
 	@Override
 	public void addTracker(Tracker tracker) {
-		synchronized(trackers){
+		
 			if (!trackers.contains(tracker)) { // only add the same tracker once
 				trackers.add(tracker);
 				tracker.initialize(this);
 			}
-		}
+		
 	}
 
 	@Override
 	public void interruptTracker(Tracker tracker) {
-		synchronized(trackers){
+		
 		if (trackers.contains(tracker))
 			tracker.interrupt();
-		}
+		
 	}
 
 	@Override
@@ -359,10 +359,10 @@ public class GameStandard extends Game {
 	 */
 	protected void renewTrackers() {
 		// renew the tracking list if needed
-		synchronized(trackers){
+		
 		if (trackers.size() > 0)
 			trackers = new LinkedList<Tracker>();
-		}
+		
 		
 		// floor trackers that are only used with working floor
 		if (floor != null) {
