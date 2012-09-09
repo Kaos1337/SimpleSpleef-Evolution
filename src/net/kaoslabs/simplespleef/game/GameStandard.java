@@ -24,6 +24,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -189,7 +190,7 @@ public class GameStandard extends Game {
 		this.spectators = new LinkedList<Player>();
 		this.teleportOkList = new HashSet<Player>();
 		this.gamemodeChangeOkList = new HashSet<Player>();
-		this.trackers = new LinkedList<Tracker>();
+		this.trackers = new ArrayList<Tracker>();
 	}
 
 	@Override
@@ -216,16 +217,18 @@ public class GameStandard extends Game {
 		if (!isEnabled() || !isActive()) return; //ignore disabled and inactive arenas
 
 		// call trackers in each tick
-		
+		List<Tracker> pyrod = new ArrayList<Tracker>();
 	        for (Iterator<Tracker> iterator = trackers.iterator(); iterator.hasNext();) {
 	            Tracker tracker = iterator.next();
 	            if (tracker.tick()) { // returned true - this means the tracker signalled its end - remove from list
 	            	if(SimpleSpleef.DEBUG_MODE)
 	            		System.out.println("[SpleefArenaDEBUG] tracker fottuto: "+tracker.getClass().getName()+" toString:"+tracker);
-	                iterator.remove(); // remove element
+	                pyrod.add(tracker);
+	            	//iterator.remove(); // remove element
 	            }
-	            
 	        }
+	    trackers.removeAll(pyrod);
+	    
 	    if(SimpleSpleef.DEBUG_MODE)
 	    	System.out.println("[SpleefArenaDEBUG] tracker rimasti: "+StringUtils.listToString(trackers, "", ", ", ""));
 		
@@ -366,7 +369,7 @@ public class GameStandard extends Game {
 		// renew the tracking list if needed
 		
 		if (trackers.size() > 0)
-			trackers = new LinkedList<Tracker>();
+			trackers = new ArrayList<Tracker>();
 		
 		
 		// floor trackers that are only used with working floor
