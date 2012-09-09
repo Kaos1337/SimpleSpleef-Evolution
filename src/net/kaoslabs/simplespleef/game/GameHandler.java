@@ -110,7 +110,6 @@ public class GameHandler implements Listener, Runnable {
 	 */
 	@Override
 	public void run() {
-		int i = 0;
 		for (Game game : games){ // cycle through games
 			game.tick(); // call tick
 		}

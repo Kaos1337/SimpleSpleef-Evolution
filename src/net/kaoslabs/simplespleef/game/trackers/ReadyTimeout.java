@@ -93,11 +93,11 @@ public class ReadyTimeout implements Tracker {
 	 */
 	@Override
 	public boolean tick() {
-		// if interrupted or finished - kill timeout
-		if (interrupted || game.isInProgress() || game.isFinished()) return true;
-		
 		if(SimpleSpleef.DEBUG_MODE)
 			System.out.println("[SpleefArenaDEBUG]"+ this + " called a tick | interrupted="+interrupted+", game="+game.getStatus()+", count="+count);
+		
+		// if interrupted or finished - kill timeout
+		if (interrupted || game.isInProgress() || game.isFinished()) return true;
 		
 		// wait as long as game is joinable
 		if (!game.isJoinable()) return false;
