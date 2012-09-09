@@ -703,6 +703,11 @@ public class GameStandard extends Game {
 
 		// and/or give shovels
 		addShovelItems();
+		
+		// disable fly
+		for (Spleefer spleefer : spleefers.get()) {
+			spleefer.getPlayer().setFlying(false);
+		}
 
 		return true;
 	}
