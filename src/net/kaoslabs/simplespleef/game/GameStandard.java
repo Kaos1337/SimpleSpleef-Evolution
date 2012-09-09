@@ -934,8 +934,6 @@ public class GameStandard extends Game {
 
 			// player loses, if set to true
 			playerLoses(player, true); // do not teleport dead players...
-		} else {
-			teleportPlayer(player, "lose");
 		}
 	}
 
