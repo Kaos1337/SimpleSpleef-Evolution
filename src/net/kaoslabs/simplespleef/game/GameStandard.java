@@ -226,7 +226,7 @@ public class GameStandard extends Game {
 	            
 	        }
 		} catch(Exception e) {
-			//System.out.println("[SpleefArenaDEBUG] Concurrent modification, ignoring.. (LOL)");
+			System.out.println("[SpleefArenaDEBUG] Concurrent modification, ignoring.. (LOL)");
 		}
 	    if(SimpleSpleef.DEBUG_MODE)
 	    	System.out.println("[SpleefArenaDEBUG] tracker rimasti: "+StringUtils.listToString(trackers, "", ", ", ""));
@@ -703,6 +703,11 @@ public class GameStandard extends Game {
 
 		// and/or give shovels
 		addShovelItems();
+		
+		// disable fly
+		for (Spleefer spleefer : spleefers.get()) {
+			spleefer.getPlayer().setFlying(false);
+		}
 
 		return true;
 	}
