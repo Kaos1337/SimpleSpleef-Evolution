@@ -152,25 +152,27 @@ public class UpdateChecker implements Listener {
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		// update checker activated
-		if (SimpleSpleef.getPlugin().getConfig().getBoolean("settings.updateNotificationOnLogin", true)) {
-			final Player player = event.getPlayer();
-			// Check for updates whenever an operator or user with the right simplespleef.admin joins the game
-			if (player != null && (player.isOp() || SimpleSpleef.checkPermission(player, "simplespleef.admin"))) {
-				SimpleSpleef.getPlugin().getServer().getScheduler().scheduleAsyncDelayedTask(SimpleSpleef.getPlugin(), new Runnable() { // create a new anonymous task/thread that will check the version asyncronously
-					@Override
-					public void run() {
-						try {
-							// compare versions
-							String oldVersion = SimpleSpleef.getPlugin().getDescription().getVersion();
-							String newVersion = checkForUpdate(oldVersion);
-							if (newVersion != null) // do we have a version update? => notify player
-								player.sendMessage(SimpleSpleef.ll("feedback.update", "[OLDVERSION]", oldVersion, "[NEWVERSION]", newVersion));
-						} catch (Exception e) {
-							player.sendMessage("SimpleSpleef could not get version update - see log for details.");
-							SimpleSpleef.log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
+		if(!SimpleSpleef.BETA_MODE){
+			if (SimpleSpleef.getPlugin().getConfig().getBoolean("settings.updateNotificationOnLogin", true)) {
+				final Player player = event.getPlayer();
+				// Check for updates whenever an operator or user with the right simplespleef.admin joins the game
+				if (player != null && (player.isOp() || SimpleSpleef.checkPermission(player, "simplespleef.admin"))) {
+					SimpleSpleef.getPlugin().getServer().getScheduler().scheduleAsyncDelayedTask(SimpleSpleef.getPlugin(), new Runnable() { // create a new anonymous task/thread that will check the version asyncronously
+						@Override
+						public void run() {
+							try {
+								// compare versions
+								String oldVersion = SimpleSpleef.getPlugin().getDescription().getVersion();
+								String newVersion = checkForUpdate(oldVersion);
+								if (newVersion != null) // do we have a version update? => notify player
+									player.sendMessage(SimpleSpleef.ll("feedback.update", "[OLDVERSION]", oldVersion, "[NEWVERSION]", newVersion));
+							} catch (Exception e) {
+								player.sendMessage("SimpleSpleef could not get version update - see log for details.");
+								SimpleSpleef.log.warning("[SimpleSpleefEvo] Could not connect to remote server to check for update. Exception said: " + e.getMessage());
+							}
 						}
-					}
-				}, 0L);
+					}, 0L);
+				}
 			}
 		}
 	}

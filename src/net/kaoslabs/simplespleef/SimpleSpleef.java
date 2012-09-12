@@ -61,6 +61,7 @@ public class SimpleSpleef extends JavaPlugin {
 	public static final Logger log = Logger.getLogger("Minecraft");
 
 	public static final boolean DEBUG_MODE = false;
+	public static final boolean BETA_MODE = true;
 	
 	/**
 	 * reference to Vault economy
