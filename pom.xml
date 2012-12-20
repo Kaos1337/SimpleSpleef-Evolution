@@ -63,6 +63,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<resources>
+      		<resource>
+     			<directory>resources</directory>
+    		</resource>
+   		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
