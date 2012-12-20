@@ -11,6 +11,14 @@
 			<id>bukkit-repo</id>
 			<url>http://repo.bukkit.org/content/groups/public/</url>
 		</repository>
+		<repository>
+          		<id>vault-repo</id>
+          		<url>http://ess.ementalo.com/nexus/content/groups/public/</url>
+        	</repository>
+                <repository>
+      			<id>sk89q-repo</id>
+      			<url>http://maven.sk89q.com/repo/</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -20,20 +28,20 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency><!-- You have to run 'mvn install:install-file -DgroupId=net.milkbowl -DartifactId=vault -Dversion=1.2.16 -Dpackaging=jar -Dfile=Vault.jar' in order to make this work: -->
+		<dependency>
 			<groupId>net.milkbowl</groupId>
-			<version>1.2.16</version>
-			<artifactId>vault</artifactId>
+			<version>1.2</version>
+			<artifactId>Vault</artifactId>
 		</dependency>
-        <dependency><!-- You have to run 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldedit -Dversion=5.3 -Dpackaging=jar -Dfile=WorldEdit.jar' in order to make this work: -->
+        <dependency>
             <groupId>com.sk89q</groupId>
             <artifactId>worldedit</artifactId>
-            <version>5.3</version>
+            <version>5.4.5</version>
         </dependency>
-		<dependency><!-- You have to run 'mvn install:install-file -DgroupId=com.sk89q -DartifactId=worldguard -Dversion=5.5.2 -Dpackaging=jar -Dfile=worldguard-5.5.2.jar' in order to make this work: -->
+		<dependency>
 			<groupId>com.sk89q</groupId>
             <artifactId>worldguard</artifactId>
-            <version>5.5.2</version>
+            <version>5.6</version>
         </dependency>
 		<dependency><!-- You have to run 'mvn install:install-file -DgroupId=tehbeard  -DartifactId=beardstat -Dversion=0.4 -Dpackaging=jar -Dfile=BeardStat.jar' in order to make this work: -->
 			<groupId>tehbeard</groupId>
