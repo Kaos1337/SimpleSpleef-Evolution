@@ -134,7 +134,6 @@ public class SimpleSpleefCommandExecutor implements CommandExecutor {
 			if (!SimpleSpleef.checkPermission(sender, "simplespleef.sign." + subcommand))
 				return permissionMissing(sender, subcommand, signCommand);
 			
-			// TODO: mettere il metodo in SimpleSleef per preservare l'ereditarietˆ
 		} else if (!SimpleSpleef.permission.has(sender,"simplespleef." + subcommand)) // check normal permissions for normal commands
 			return permissionMissing(sender, subcommand, signCommand);
 
