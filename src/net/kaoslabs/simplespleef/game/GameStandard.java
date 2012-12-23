@@ -63,6 +63,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 
 import net.kaoslabs.simplespleef.SimpleSpleef;
@@ -509,7 +510,7 @@ public class GameStandard extends Game {
 				}
 				// ok, is a part of the fee paid to a player?
 				String playerNameGettingFees = configuration.getString("entryFeeGoesToPlayer", "none");
-				if (playerNameGettingFees != null && !playerNameGettingFees.equalsIgnoreCase("none") &&  SimpleSpleef.economy.hasAccount(playerNameGettingFees))
+				if (SimpleSpleef.economy != null && playerNameGettingFees != null && !playerNameGettingFees.equalsIgnoreCase("none") &&  SimpleSpleef.economy.hasAccount(playerNameGettingFees))
 					SimpleSpleef.economy.depositPlayer(playerNameGettingFees, configuration.getDouble("entryFeeAmountToPlayer", entryFee));
 			}
 		}
@@ -702,6 +703,9 @@ public class GameStandard extends Game {
 		for (Spleefer spleefer : spleefers.get()) {
 			spleefer.getPlayer().setAllowFlight(false);
 			spleefer.getPlayer().setFlying(false);
+			// also disable any potion effects
+			// this resolves #23
+			removePotionEffects(spleefer.getPlayer());
 		}
 
 		// optionally add to inventory
@@ -1809,7 +1813,7 @@ public class GameStandard extends Game {
 		double prizeMoneyFixed = configuration.getDouble("prizeMoneyFixed", 0.0);
 		double prizeMoneyPerPlayer = configuration.getDouble("prizeMoneyPerPlayer", 5.0);
 		double win = prizeMoneyFixed + prizeMoneyPerPlayer * spleefers.size();
-		if (win == 0) return; // if no prize money is payed, return without telling anybody
+		if (win == 0) return; // if no prize money is paid, return without telling anybody
 		if (SimpleSpleef.economy != null) {
 			String formated = SimpleSpleef.economy.format(win);
 			// give money to player
@@ -2120,6 +2124,19 @@ public class GameStandard extends Game {
 		}
 	}
 
+	/**
+	 * remove all potion effects on a player
+	 * @param player
+	 */
+	private void removePotionEffects(Player player) {
+		// change only if setting has been set to do so
+		if (configuration.getBoolean("removePotionEffects", true)) {
+			for(PotionEffectType s : PotionEffectType.values()) {
+				player.removePotionEffect(s);
+			}
+		}
+	}
+	
 	@Override
 	public long getStartTime() {
 		return startTime;

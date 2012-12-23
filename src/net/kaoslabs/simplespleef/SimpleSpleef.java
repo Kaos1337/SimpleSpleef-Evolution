@@ -223,13 +223,6 @@ public class SimpleSpleef extends JavaPlugin {
 		
 		// start Metrics
 		startMetrics();
-		
-		// check the presence of Vault plugin (required)
-		PluginManager pm = getServer().getPluginManager();
-		if (pm.getPlugin("Vault") == null) {
-			getLogger().info("Permission plugin not found... shutting down!");
-			pm.disablePlugin(this);
-		}
 	}
 
 	/**
@@ -303,7 +296,7 @@ public class SimpleSpleef extends JavaPlugin {
 		final UpdateChecker checker = new UpdateChecker();
 		
 		// possibly check for updates in the internet on startup
-		this.getServer().getScheduler().scheduleAsyncDelayedTask(this, new Runnable() {
+		this.getServer().getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 		    public void run() {
 		    	try {
 					String newVersion = checker.checkForUpdate(SimpleSpleef.simpleSpleef.getDescription().getVersion());

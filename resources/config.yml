@@ -63,6 +63,8 @@ settings:
 # Keep in mind that this opens a possible exploit: When joining from a creative world and leaving the game players stay in creative mode.
 # If you have a combination of creative and survival games, turn off this setting.
     changeGameModeBackToCreative: true
+# Remove all potion effects from players before the game starts?
+    removePotionEffects: true
 # Enable statistics module?
     enableStatistics: true
 # Type of statistics module; possible values are: file, beardstat, hawkeye
