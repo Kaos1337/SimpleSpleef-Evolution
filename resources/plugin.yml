@@ -1,8 +1,8 @@
 name: SimpleSpleef
 main: net.kaoslabs.simplespleef.SimpleSpleef
-version: 3.4.1
+version: 3.4.2
 dev-url: http://dev.bukkit.org/server-mods/simplespleef-evolution/
-author: [Kaos, zorlax]
+author: [Kaos, zorlax, tuxed]
 description: >
              Simple Spleef Plugin
 softdepend: ['Vault','WorldEdit','WorldGuard']
@@ -15,121 +15,121 @@ commands:
 permissions:
   simplespleef.help:
     description: Display help
-    default: false
+    default: true
   simplespleef.announce:
     description: Announce a new game (in arena)
-    default: false
+    default: true
   simplespleef.join:
     description: Join a game (in arena)
-    default: false
+    default: true
   simplespleef.arenas:
     description: List available arenas
-    default: false
+    default: true
   simplespleef.info:
     description: Show information (on arena)
     default: false
   simplespleef.list:
     description: List spleefers (in arena)
-    default: false
+    default: true
   simplespleef.team:
     description: Join team (joined spleefers only)
     default: false
   simplespleef.ready:
     description: Ready for a game (spleefers only)
-    default: false
+    default: true
   simplespleef.start:
     description: Start game (spleefers only)
-    default: false
+    default: true
   simplespleef.countdown:
     description: Start count down (of arena)
     default: false
   simplespleef.leave:
     description: Leave a game
-    default: false
+    default: true
   simplespleef.stop:
     description: Stop a game
-    default: false
+    default: op
   simplespleef.delete:
     description: Delete a game
-    default: false
+    default: op
   simplespleef.reset:
     description: Reset a game (admin/moderator delete game)
     default: op
   simplespleef.watch:
     description: Watch a game
-    default: false
+    default: true
   simplespleef.back:
     description: Teleport back from arena
-    default: false
+    default: true
   simplespleef.me:
     description: Show my game statistics
-    default: false
+    default: true
   simplespleef.player:
     description: Show game statistics of player
-    default: false
+    default: true
   simplespleef.topten:
     description: Show top 10 total or by arena
-    default: false
+    default: true
   simplespleef.admin:
     description: Admin commands
     default: op
   simplespleef.sign.create:
     description: Create Spleef signs
-    default: false
+    default: op
   simplespleef.sign.help:
     description: Display help (sign command)
-    default: false
+    default: true
   simplespleef.sign.announce:
     description: Announce a new game (in arena) (sign command)
-    default: false
+    default: true
   simplespleef.sign.join:
     description: Join a game (in arena) (sign command)
-    default: false
+    default: true
   simplespleef.sign.arenas:
     description: List available arenas (sign command)
-    default: false
+    default: true
   simplespleef.sign.info:
     description: Show information (on arena) (sign command)
-    default: false
+    default: true
   simplespleef.sign.list:
     description: List spleefers (in arena) (sign command)
-    default: false
+    default: true
   simplespleef.sign.team:
     description: Join team (joined spleefers only) (sign command)
   simplespleef.sign.ready:
     description: Ready for a game (spleefers only) (sign command)
-    default: false
+    default: true
   simplespleef.sign.start:
     description: Start game (spleefers only) (sign command)
-    default: false
+    default: true
   simplespleef.sign.countdown:
     description: Start count down (of arena) (sign command)
     default: false
   simplespleef.sign.leave:
     description: Leave a game (sign command)
-    default: false
+    default: true
   simplespleef.sign.stop:
     description: Stop a game (sign command)
-    default: false
+    default: true
   simplespleef.sign.delete:
     description: Delete a game (sign command)
-    default: false
+    default: op
   simplespleef.sign.reset:
     description: Reset a game (admin/moderator delete game) (sign command)
     default: op
   simplespleef.sign.watch:
     description: Watch a game (sign command)
-    default: false
+    default: true
   simplespleef.sign.back:
     description: Teleport back from arena (sign command)
-    default: false
+    default: true
   simplespleef.sign.me:
     description: Show my game statistics (sign command)
-    default: false
+    default: true
   simplespleef.sign.player:
     description: Show game statistics of player (sign command)
-    default: false
+    default: true
   simplespleef.sign.topten:
     description: Show top 10 total or by arena (sign command)
-    default: false
+    default: true
  
